@@ -3,16 +3,21 @@ const countryInput = document.getElementById('country-input');
 const countryDetails = document.getElementById('country-details');
 
 searchBtn.addEventListener('click', () => {
-    const countryName = countryInput.value;
-    if (countryName.trim() === '') {
+    const countryName = countryInput.value.trim();
+    if (countryName === '') {
         alert('Please enter a country name.');
         return;
     }
 
-    fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+    const url = `https://restcountries.com/v3.1/name/${countryName}`;
+
+    // Hide previous results and show loading state if desired
+    countryDetails.classList.remove('visible');
+    
+    fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Country not found');
+                throw new Error('Country not found. Please check the spelling.');
             }
             return response.json();
         })
@@ -20,19 +25,38 @@ searchBtn.addEventListener('click', () => {
             displayCountry(data[0]);
         })
         .catch(error => {
-            countryDetails.innerHTML = `<p>${error.message}</p>`;
+            countryDetails.innerHTML = `<p style="text-align: center; color: #ff4d4d;">${error.message}</p>`;
+            countryDetails.classList.remove('hidden');
+            setTimeout(() => countryDetails.classList.add('visible'), 10);
         });
 });
 
 function displayCountry(country) {
-    const html = `
-        <h2>${country.name.common}</h2>
-        <img src="${country.flags.svg}" alt="Flag of ${country.name.common}" width="100">
-        <p><b>Capital:</b> ${country.capital ? country.capital[0] : 'N/A'}</p>
-        <p><b>Region:</b> ${country.region}</p>
-        <p><b>Population:</b> ${country.population.toLocaleString()}</p>
-        <p><b>Languages:</b> ${Object.values(country.languages).join(', ')}</p>
-    `;
-    countryDetails.innerHTML = html;
-}
+    const languages = country.languages ? Object.values(country.languages).join(', ') : 'N/A';
+    const capital = country.capital ? country.capital[0] : 'N/A';
+    const currency = country.currencies ? Object.values(country.currencies)[0].name : 'N/A';
 
+    const html = `
+        <div class="country-card">
+            <div class="country-header">
+                <img src="${country.flags.svg}" alt="Flag of ${country.name.common}">
+                <h2>${country.name.common}</h2>
+            </div>
+            <div class="country-info">
+                <p><b>Capital:</b> <span>${capital}</span></p>
+                <p><b>Continent:</b> <span>${country.region}</span></p>
+                <p><b>Population:</b> <span>${country.population.toLocaleString()}</span></p>
+                <p><b>Currency:</b> <span>${currency}</span></p>
+                <p><b>Languages:</b> <span>${languages}</span></p>
+            </div>
+        </div>
+    `;
+
+    countryDetails.innerHTML = html;
+    countryDetails.classList.remove('hidden');
+
+    // Use a small timeout to allow the element to be rendered before adding the transition class
+    setTimeout(() => {
+        countryDetails.classList.add('visible');
+    }, 10);
+}

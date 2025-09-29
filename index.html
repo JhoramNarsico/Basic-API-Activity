@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Country Finder</title>
+    <title>Country Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Country Finder</h1>
-        <input type="text" id="country-input" placeholder="Enter a country name...">
-        <button id="search-btn">Search</button>
-        <div id="country-details"></div>
+    <div class="background-gradient"></div>
+    <div class="main-container">
+        <header>
+            <h1>Country Explorer</h1>
+            <p class="subtitle">Discover the World at Your Fingertips</p>
+        </header>
+        <main>
+            <div class="search-wrapper">
+                <input type="text" id="country-input" placeholder="Enter a country name...">
+                <button id="search-btn">Search</button>
+            </div>
+            <div id="country-details" class="hidden">
+                <!-- Country data will be injected here -->
+            </div>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
