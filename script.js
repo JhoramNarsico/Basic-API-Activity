@@ -11,7 +11,6 @@ searchBtn.addEventListener('click', () => {
 
     const url = `https://restcountries.com/v3.1/name/${countryName}`;
 
-    // Hide previous results and show loading state if desired
     countryDetails.classList.remove('visible');
     
     fetch(url)
@@ -59,4 +58,5 @@ function displayCountry(country) {
     setTimeout(() => {
         countryDetails.classList.add('visible');
     }, 10);
+
 }
