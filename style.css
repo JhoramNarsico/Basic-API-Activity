@@ -1,5 +1,4 @@
 :root {
-    /* Minimal & Modern Theme */
     --primary-accent: #007aff;
     --background-dark: #121418;
     --card-background: rgba(22, 25, 31, 0.6);
@@ -25,7 +24,6 @@ body {
     padding: 2rem;
 }
 
-/* --- Background Styles --- */
 .country-background {
     position: fixed;
     top: 0;
@@ -75,7 +73,6 @@ body {
     text-align: center;
 }
 
-/* --- Header & Search Styles --- */
 header h1 { 
     font-size: clamp(2rem, 5vw, 3rem); 
     font-weight: 700; 
@@ -137,7 +134,6 @@ header h1 {
     color: var(--primary-accent); 
 }
 
-/* --- Loader Spinner --- */
 .loader {
     width: 48px;
     height: 48px;
@@ -154,7 +150,6 @@ header h1 {
     100% { transform: rotate(360deg); }
 }
 
-/* --- Country Card Styles --- */
 #country-details {
     text-align: left;
     opacity: 0;
@@ -228,11 +223,11 @@ header h1 {
     display: none; 
 }
 
-/* --- Error Styling --- */
 .error-message {
     text-align: center;
     color: #ff6b6b;
     background: rgba(255, 107, 107, 0.1);
     border-radius: 10px;
     padding: 1rem;
+
 }
