@@ -1,6 +1,4 @@
-// --- SCRIPT CONFIGURATION ---
-const PEXELS_API_KEY = 'EAgyxAl0cePjeDbCNQinchWVuiB6V3dCNaDu1DaP3W3yBtg12KGuHPs6'; // <-- PASTE YOUR INSTANT KEY HERE
-// ----------------------------
+const PEXELS_API_KEY = 'EAgyxAl0cePjeDbCNQinchWVuiB6V3dCNaDu1DaP3W3yBtg12KGuHPs6'; 
 
 const searchBtn = document.getElementById('search-btn');
 const countryInput = document.getElementById('country-input');
@@ -17,22 +15,19 @@ function findCountry() {
     const countryName = countryInput.value.trim();
     if (countryName === '') return;
 
-    // --- UI Updates on Search Start ---
     resetUI();
     countryDetails.classList.add('hidden');
-    loader.classList.remove('hidden'); // Show loader
+    loader.classList.remove('hidden'); 
     
-    // Step 1: Fetch data from REST Countries API
     fetch(`https://restcountries.com/v3.1/name/${countryName}`)
         .then(response => {
             if (!response.ok) throw new Error('Country not found. Please try again.');
             return response.json();
         })
         .then(data => {
-            loader.classList.add('hidden'); // Hide loader on success
+            loader.classList.add('hidden'); 
             const country = data[0];
             displayCountry(country);
-            // Step 2: Use the country name to fetch a background image from Pexels
             updateBackgroundImage(country.name.common);
         })
         .catch(handleError);
@@ -90,9 +85,10 @@ function resetUI() {
 }
 
 function handleError(error) {
-    loader.classList.add('hidden'); // Also hide loader on error
+    loader.classList.add('hidden');
     countryDetails.innerHTML = `<div class="error-message">${error.message}</div>`;
     countryDetails.classList.remove('hidden');
     setTimeout(() => countryDetails.classList.add('visible'), 10);
     resetUI();
+
 }
